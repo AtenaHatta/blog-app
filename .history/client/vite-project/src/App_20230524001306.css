@@ -100,9 +100,7 @@ form h1{
   text-align:  center;
 }
 
-.homeBtn{
-  color: #fffefe;
+a{
+  color: #555;
   text-decoration: none;
-  background-color: #555;
-  
 }

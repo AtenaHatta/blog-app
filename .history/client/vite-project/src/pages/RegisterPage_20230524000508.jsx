@@ -29,9 +29,7 @@ export default function RegisterPage() {
                        value={password}
                        onChange={ev => setPassword(ev.target.value)}
                   />
-                <button type='submit'>Register</button>
-                <br/>
-                <button > <a className='homeBtn' href='/'>Go Home page</a></button>
+                <button>Register</button>
             </form>
         </div>
     )

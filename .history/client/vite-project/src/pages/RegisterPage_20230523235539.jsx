@@ -8,7 +8,7 @@ export default function RegisterPage() {
 
     async function register(ev) {
         ev.preventDefault()
-        await fetch('http://localhost:8000/register', {
+        await fetch('http://localhost:4000/register', {
             method: 'POST',
             body: JSON.stringify({ username, password }), 
             headers: {'Content-Type': 'application/json'} // Send data as "JSON"
@@ -29,9 +29,7 @@ export default function RegisterPage() {
                        value={password}
                        onChange={ev => setPassword(ev.target.value)}
                   />
-                <button type='submit'>Register</button>
-                <br/>
-                <button > <a className='homeBtn' href='/'>Go Home page</a></button>
+                <button>Register</button>
             </form>
         </div>
     )
