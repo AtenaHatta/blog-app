@@ -1,5 +1,5 @@
 *{
-  box-sizing: border-box;
+  
 }
 
 body{
@@ -88,13 +88,4 @@ input{
 button{
   width: 100%;
   display: block;
-  background-color: #555;
-  border: 0;
-  color: #fff;
-  border-radius: 5px;
-  padding: 7px
-}
-
-form h1{
-  text-align:  center;
 }
