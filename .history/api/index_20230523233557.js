@@ -1,9 +1,8 @@
 const express = require('express');
 const app = express();
 
-app.post('/register', (req, res) => {
-    res.json({message: 'test ok'}) 
-    
+app.get('/', (req, res) => {
+    res.json({message: 'test oks'})
 })
 
 app.listen(4000)
