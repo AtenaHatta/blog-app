@@ -11,7 +11,7 @@ export default function RegisterPage() {
         await fetch('http://localhost:8000/register', {
             method: 'POST',
             body: JSON.stringify({ username, password }), 
-            headers: {'Content-Type': 'application/json'} // Send data as "JSON"
+            headers: {'Content-Type': 'application/json'}, // Send data as "JSON"
      })
     }
 
@@ -31,7 +31,7 @@ export default function RegisterPage() {
                   />
                 <button type='submit'>Register</button>
                 <br/>
-                <button > <a className='homeBtn' href='/'>Go Home page</a></button>
+                <button><a className='homeBtn' href='/'>Go Home page</a></button>
             </form>
         </div>
     )
