@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
 const salt = bcrypt.genSaltSync(10);
 const secret = 'vfdgdnhtnmnrhgrsfsf'
 
-app.use(cors());
+app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
 app.use(express.json())
 
 //mongoDB's project code
@@ -39,13 +39,13 @@ app.post('/login', async (req, res) => {
     
     //check if username exists
     const userDoc = await User.findOne({ username });
-    const passOk = bcrypt.compareSync(password, userDoc.password); //compare password
+    const passOk = userDoc && bcrypt.compareSync(password, userDoc.password); //compare password
 
     if(passOk){
         //logged in
         jwt.sign({username,id:userDoc._id}, secret, {}, (err,token) => {
            if(err) throw err;
-           res.json(token)
+           res.cookie('token', token).json('ok')
         })
     }else{
         res.status(400).json('Wrong credentials')
