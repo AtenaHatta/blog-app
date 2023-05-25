@@ -6,7 +6,7 @@ app.use(cors());
 
 app.post('/register', (req, res) => {
     res.json({message: 'test ok'}) 
-    
+     
 })
 
 app.listen(8000)
