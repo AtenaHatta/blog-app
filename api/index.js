@@ -1,13 +1,13 @@
 const express = require('express');
 const cors = require('cors');
-const User = require('@/api/models/User');
+const mongoose = require('mongoose');
+const User = require('../api/src/models/User.jsx');
 const app = express();
 
 app.use(cors());
 app.use(express.json())
 
-mongoose.connect('mongodb+srv://blog:jDqmMqGf4X11ggzm@cluster0.glsk2nu.mongodb.net/?retryWrites=true&w=majority')
-
+mongoose.connect('mongodb+srv://blog_test:gM4lEEyJVQud9nBX@cluster0.xt0cicu.mongodb.net/?retryWrites=true&w=majority')
 
 app.post('/register',  async (req, res) => {
     const { username, password } = req.body;
