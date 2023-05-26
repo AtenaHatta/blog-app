@@ -5,12 +5,16 @@ const User = require('../api/src/models/User.jsx');
 const bcrypt = require('bcryptjs');
 const app = express();
 const jwt = require('jsonwebtoken');
-
+const cookieParser = require('cookie-parser');
 const salt = bcrypt.genSaltSync(10);
 const secret = 'vfdgdnhtnmnrhgrsfsf'
 
+
+//cors allow to access "localhost:5173" to "localhost:8000"
 app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
-app.use(express.json())
+app.use(express.json());
+app.use(cookieParser());
+
 
 //mongoDB's project code
 mongoose.connect('mongodb+srv://blog_test:gM4lEEyJVQud9nBX@cluster0.xt0cicu.mongodb.net/?retryWrites=true&w=majority')
@@ -51,6 +55,21 @@ app.post('/login', async (req, res) => {
         res.status(400).json('Wrong credentials')
     }
 })
+
+
+// Get a token(id,username)
+app.get('/profile', (req, res) => {
+    const{ token } = req.cookies;
+    jwt.verify(token, secret, {}, (err, info) => {
+       if(err) throw err;
+       res.json(info)
+    })
+})
+
+
+app.post('/logout', (req, res) => {
+    res.cookie('token', '').json('ok')
+});
 
 
 app.listen(8000)
