@@ -1,6 +1,7 @@
 // import { set } from 'mongoose';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Navigate } from 'react-router-dom';
+import { UserContext } from '../UserContext';
 
 export default function LoginPage() {
 
@@ -8,6 +9,7 @@ export default function LoginPage() {
     const [ username, setUsername ] = useState('')
     const [ password, setPassword ] = useState('')
     const [ redirect, setRedirect ] = useState(false)
+    const { setUserInfo } = useContext(UserContext)
 
     async function login(ev){
         ev.preventDefault()
@@ -17,8 +19,13 @@ export default function LoginPage() {
             headers: {'Content-Type': 'application/json'}, // Send data as "JSON"
             credentials: 'include',
         })
+        // Go to user page
         if(response.ok){
-           setRedirect(true)
+            response.json().then(userInfo => { 
+                setUserInfo(userInfo)
+                setRedirect(true)
+            })
+           
         } else {
             alert('Wrong credentials')
         }

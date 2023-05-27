@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const User = require('../api/src/models/User.jsx');
+const User = require('../api/src/models/User.js');
 const bcrypt = require('bcryptjs');
 const app = express();
 const jwt = require('jsonwebtoken');
@@ -43,13 +43,16 @@ app.post('/login', async (req, res) => {
     
     //check if username exists
     const userDoc = await User.findOne({ username });
-    const passOk = userDoc && bcrypt.compareSync(password, userDoc.password); //compare password
+    const passOk =  userDoc && bcrypt.compareSync(password, userDoc.password); //compare password
 
     if(passOk){
         //logged in
-        jwt.sign({username,id:userDoc._id}, secret, {}, (err,token) => {
-           if(err) throw err;
-           res.cookie('token', token).json('ok')
+        jwt.sign({username, id:userDoc._id}, secret, {}, (err,token) => {
+            if(err) throw err;
+            res.cookie('token', token).json({ // Get userID and username
+                id:userDoc._id,
+                username,
+            })
         })
     }else{
         res.status(400).json('Wrong credentials')
@@ -60,16 +63,21 @@ app.post('/login', async (req, res) => {
 // Get a token(id,username)
 app.get('/profile', (req, res) => {
     const{ token } = req.cookies;
+    console.log(req.cookies);
     jwt.verify(token, secret, {}, (err, info) => {
        if(err) throw err;
        res.json(info)
+       console.log(token);
     })
 })
 
 
+// Logout -----------------------------
 app.post('/logout', (req, res) => {
     res.cookie('token', '').json('ok')
 });
+
+
 
 
 app.listen(8000)
