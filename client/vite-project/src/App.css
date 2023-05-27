@@ -96,7 +96,7 @@ button{
   cursor: pointer;
 }
 
-form h1{
+form h1, form.regster h1{
   text-align:  center;
 }
 
@@ -104,5 +104,4 @@ form h1{
   color: #fffefe;
   text-decoration: none;
   background-color: #555;
-  
 }

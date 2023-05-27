@@ -8,6 +8,8 @@ const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const salt = bcrypt.genSaltSync(10);
 const secret = 'vfdgdnhtnmnrhgrsfsf'
+const multer = require('multer');
+const uploadMiddleware = multer({ dest: 'uploads/' });
 
 
 //cors allow to access "localhost:5173" to "localhost:8000"
@@ -76,6 +78,12 @@ app.get('/profile', (req, res) => {
 app.post('/logout', (req, res) => {
     res.cookie('token', '').json('ok')
 });
+
+
+// file upload -----------------------------
+app.post('/post', uploadMiddleware.single('file'), (req,res) => {
+  res.json({files: req.file});
+})
 
 
 
