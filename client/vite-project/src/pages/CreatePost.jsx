@@ -29,31 +29,31 @@ export default function CreatePost() {
     const [content, setContent] = useState('');
     const [files, setFiles] = useState('');
 
-    async function crearteNewPost(){
+     async function createNewPost(e){
+        e.preventDefault();
      const data = new FormData();
      data.set('title', title);
      data.set('summary', summary);
      data.set('content', content);
-     data.set('files', files[0]);
-     e.preventDefault();
-     const response = await fetch('http://localhost:8000/posts',{
+     data.set('file', files[0]); // "files data" is in an array[0]
+     console.log(files);
+     const response = await fetch('http://localhost:8000/post',{
         method: 'POST',
         body: data,
      })
-     console.log(await response.json());
     }
 
     return (
-        <form onSubmit={crearteNewPost}>
+        <form onSubmit={(e) => createNewPost(e)}>
             <input type='title' 
                    placeholder={'Title'} 
                    value={title} 
-                   onChange={e => setTitle(e.target.value)}
+                   onChange={(e) => setTitle(e.target.value)}
             />
             <input type='summary' 
                    placeholder={'Summary'} 
                    value={summary}
-                   onChange={e => setSummary(e.target.value)}
+                   onChange={(e) => setSummary(e.target.value)}
             />
             <input type='file' 
                    onChange={(e) => setFiles(e.target.files)}
@@ -62,7 +62,8 @@ export default function CreatePost() {
                         onChange={newValue => setContent(newValue)}
                         modules={modules}
                         formats={formats} />
-            <button style={{marginTop: '5px'}}>Create post</button>
+            <button type='submit' style={{marginTop: '5px'}}>Create post</button>
         </form>
+   
     );
 }
