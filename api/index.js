@@ -12,11 +12,15 @@ const secret = "vfdgdnhtnmnrhgrsfsf";
 const multer = require("multer"); //upload file
 const uploadMiddleware = multer({ dest: "uploads/" }); //upload file to "uploads" folder
 const fs = require("fs"); //file system
+const path = require('path');
 
 //cors allow to access "localhost:5173" to "localhost:8000"
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 app.use(express.json());
 app.use(cookieParser());
+
+const staticFilePath = path.join(__dirname, 'uploads');
+app.use(express.static(staticFilePath));
 
 //mongoDB's project code
 mongoose.connect(
@@ -76,15 +80,20 @@ app.post("/logout", (req, res) => {
   res.cookie("token", "").json("ok");
 });
 
+
 // Post update ------------------------
 app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
-    const { originalname, path } = req.file;
-    console.log(req.file);
-    const parts = originalname.split(".");
-    const ext = parts[parts.length - 1];
-    const newPath = path + "." + ext;
-    fs.renameSync(path, path + "." + ext);
-  
+    let newPath = "";
+    
+    if (req.file) {
+      const { originalname, path } = req.file;
+      console.log(req.file);
+      const parts = originalname.split(".");
+      const ext = parts[parts.length - 1];
+      newPath = path + "." + ext;
+      fs.renameSync(path, path + "." + ext);
+    }
+    
     const { token } = req.cookies;
     jwt.verify(token, secret, {}, async (err, decoded) => {
       if (err) {
@@ -96,13 +105,18 @@ app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
       const { id } = decoded; // Assuming the ID is stored in the 'id' property of the 'decoded' object
   
       const { title, summary, content } = req.body;
-      const postDoc = await Post.create({
+      const postData = {
         title,
         summary,
         content,
-        cover: newPath,
         author: id,
-      });
+      };
+      
+      if (newPath !== "") {
+        postData.cover = newPath;
+      }
+  
+      const postDoc = await Post.create(postData);
   
       res.json(postDoc);
     });
@@ -114,4 +128,6 @@ app.get("/post", async (req, res) => {
   res.json(await Post.find());
 });
 
-app.listen(8000);
+app.listen(8000, () => {
+    console.log("Server started");
+    });

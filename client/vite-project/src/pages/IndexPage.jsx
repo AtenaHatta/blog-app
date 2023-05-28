@@ -4,6 +4,7 @@ import Post from '../Post'
 export default function indexPage(){
   const [posts, setPosts] = useState([]) 
 
+  console.log(posts);
 
     // Connect to Backend
     useEffect(() => {
