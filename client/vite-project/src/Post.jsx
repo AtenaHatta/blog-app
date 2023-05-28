@@ -1,16 +1,18 @@
-export default function Post() {
+import { formatISO9075 } from 'date-fns' // time format
+
+export default function Post({title, summary, cover, content, createdAt}) { // props to "Post.jsx"
     return(
         <div className='post'>
         <div className='image'>
           <img src="https://imgv3.fotor.com/images/blog-cover-image/part-blurry-image.jpg" />
         </div>
         <div className='texts'>
-          <h2>Full-house battery backup coming later this year</h2>
+          <h2>{title}</h2>
           <p className='info'>
             <a className='author'>Dewid Paraz</a>
-            <time>2023-01-06 16:45</time>
+            <time>{formatISO9075(new Date(createdAt))}</time>
           </p>
-          <p className='summary'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+          <p className='summary'>{summary}</p>
         </div>
       </div>
     )

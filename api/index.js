@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const User = require('../api/src/models/User.js');
+const Post = require('../api/src/models/Post.js');
 const bcrypt = require('bcryptjs');
 const app = express();
 const jwt = require('jsonwebtoken');
@@ -79,17 +80,44 @@ app.post('/logout', (req, res) => {
 });
 
 
-// file upload -----------------------------
-app.post('/post', uploadMiddleware.single('file'), (req,res) => { // only single file can upload
-  //to be able to see the file
+// Post update ------------------------
+app.post('/post', uploadMiddleware.single('file'), async(req,res) => { // only single file can upload
+  // to be able to see the file
   const { originalname, path } = req.file; //get data(originalname: example.png(file name), path: file path) from "req.file"
   console.log(req.file);
   const parts = originalname.split('.') // split "example.png" → ['example', 'png']
   const ext = parts[parts.length - 1] // ext = ['png']
+  const newPath = path + '.' + ext // newPath = "uploads/example.png"
   fs.renameSync(path, path + '.' + ext) // rename file as "uploads/example.png"
-  // get a file data
-  res.json({files:req.file});
+
+  // get a token(id,username)
+  const { token } = req.cookies; // get a token
+  jwt.verify(req.cookies.token, secret, {}, async(err, info) => { // get userID
+  if(err) throw err;
+  
+  // update data to mongoDB
+  const { title, summary, content } = req.body;
+  const postDoc = await Post.create({
+    title,
+    summary,
+    content,
+    cover: newPath, // get a file path
+    author:info.id, // get userID, connect to Login id
+  })
+  res.json(postDoc); // get a file data
 })
+
+    res.json(info)
+    })
+  
+
+
+// Get all posts -----------------------------
+app.get('/post', async(req, res) => {
+    res.json(await Post.find())
+});
+   
+
 
 
 

@@ -4,7 +4,6 @@ import { UserContext } from "./UserContext";
 
 export default function Header() {
   const { setUserInfo, userInfo } = useContext(UserContext);
-  // Cookies
 
   useEffect(() => {
     fetch("http://localhost:8000/profile", {
