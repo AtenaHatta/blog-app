@@ -16,8 +16,8 @@ export default function indexPage(){
 
  return(
     <>
-        {posts.length > 0 && posts.map(post => 
-          <Post {...post} /> // props from "Post.jsx"
+        {posts.length > 0 && posts.map((post) => 
+          <Post {...post} key={post._id}/> // props from "Post.jsx"
         )}
     </>
  )

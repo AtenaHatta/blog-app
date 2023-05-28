@@ -42,7 +42,7 @@ export default function CreatePost() {
      const response = await fetch('http://localhost:8000/post',{
         method: 'POST',
         body: data,
-        credentials: 'include', // to be able to get a cookie
+        credentials: 'include', // to send the cookies to the backend
      })
      if(response.ok){
          setRedirect(true);
