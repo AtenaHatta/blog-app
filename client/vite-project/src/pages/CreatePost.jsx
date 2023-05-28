@@ -30,7 +30,7 @@ export default function CreatePost() {
     const [files, setFiles] = useState('');
 
      async function createNewPost(e){
-        e.preventDefault();
+     e.preventDefault();
      const data = new FormData();
      data.set('title', title);
      data.set('summary', summary);
