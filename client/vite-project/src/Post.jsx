@@ -1,15 +1,20 @@
 import { formatISO9075 } from 'date-fns' // time format
+import { Link } from 'react-router-dom'
 
-export default function Post({title, summary, cover, content, createdAt}) { // props to "Post.jsx"
+export default function Post({_id, title, summary, cover, content, createdAt, author}) { 
     return(
         <div className='post'>
         <div className='image'>
-          <img src="https://imgv3.fotor.com/images/blog-cover-image/part-blurry-image.jpg" />
+          <Link to={`/post/${_id}`}>
+            <img src={'http://localhost:8000/' + cover} alt='' />
+          </Link>
         </div>
         <div className='texts'>
-          <h2>{title}</h2>
+          <Link to={`/post/${_id}`}>
+            <h2>{title}</h2>
+          </Link>
           <p className='info'>
-            <a className='author'>Dewid Paraz</a>
+            <a className='author'>{author.username}</a>
             <time>{formatISO9075(new Date(createdAt))}</time>
           </p>
           <p className='summary'>{summary}</p>

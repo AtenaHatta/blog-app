@@ -18,9 +18,8 @@ const path = require('path');
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 app.use(express.json());
 app.use(cookieParser());
+app.use('/uploads',express.static(path.join(__dirname + '/uploads')));
 
-const staticFilePath = path.join(__dirname, 'uploads');
-app.use(express.static(staticFilePath));
 
 //mongoDB's project code
 mongoose.connect(
@@ -95,29 +94,20 @@ app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
     }
     
     const { token } = req.cookies;
-    jwt.verify(token, secret, {}, async (err, decoded) => {
-      if (err) {
-        // Handle token verification error
-        console.error(err);
-        return res.status(401).json({ error: "Invalid token" });
-      }
-  
-      const { id } = decoded; // Assuming the ID is stored in the 'id' property of the 'decoded' object
-  
+    jwt.verify(token, secret, {}, async (err, info) => {
+     
+      if (err)throw err;
       const { title, summary, content } = req.body;
-      const postData = {
+      // if (newPath !== "") {
+      //   postData.cover = newPath;
+      // }
+      const postDoc = await Post.create({
         title,
         summary,
         content,
-        author: id,
-      };
-      
-      if (newPath !== "") {
-        postData.cover = newPath;
-      }
-  
-      const postDoc = await Post.create(postData);
-  
+        cover: newPath,
+        author: info.id, 
+      });
       res.json(postDoc);
     });
   });
@@ -125,7 +115,17 @@ app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
 
 // Get all posts -----------------------------
 app.get("/post", async (req, res) => {
-  res.json(await Post.find());
+  res.json(await Post.find()
+     .populate('author', ['username']) // populate: connect to User model
+     .sort({createdAt: -1}) // sort: createdAt: -1 → show the latest post
+     .limit(20) // limit: show 20 posts
+  );
+});
+
+app.get('/post/:id', async (req, res) => {
+  const { id } = req.params;
+  const postDoc = await Post.findById(id).populate('author', ['username']);
+  res.json(postDoc);
 });
 
 app.listen(8000, () => {
