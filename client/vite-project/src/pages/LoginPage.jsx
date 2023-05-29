@@ -36,7 +36,7 @@ export default function LoginPage() {
         return <Navigate to={'/'} />
     }
     return(
-        <div>
+        <div className="format-page">
             <form className='login' onSubmit={login}>
               <h1>Login</h1>
                 <input type="text" 

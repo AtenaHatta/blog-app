@@ -47,6 +47,7 @@ export default function EditPost() {
   }
  
   return (
+    <div className="format-page">
     <form onSubmit={updatePost}>
       <input
         type="title"
@@ -64,5 +65,6 @@ export default function EditPost() {
       <Editor value={content} onChange={setContent} />
       <button type="submit">Update post</button>
     </form>
+    </div>
   );
 }

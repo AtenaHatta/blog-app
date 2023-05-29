@@ -41,6 +41,7 @@ export default function CreatePost() {
   }
 
   return (
+    <div className="format-page">
     <form onSubmit={(e) => createNewPost(e)}>
       <input
         type="title"
@@ -60,5 +61,6 @@ export default function CreatePost() {
         Create post
       </button>
     </form>
+    </div>
   );
 }

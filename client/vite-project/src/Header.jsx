@@ -31,9 +31,9 @@ export default function Header() {
 
   return (
     <header>
-      <Link to="/" className="logo">
-        My Blog
-      </Link>
+        <Link to="/" className="logo">
+          CodeShare
+        </Link>
       <nav>
         {username && (
           <>
