@@ -1,38 +1,11 @@
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
 
-// ReactQuill toolbar options
-const modules = {
-  toolbar: [
-    [{ header: [1, 2, 3, 4, 5, 6, false] }],
-    ["bold", "italic", "underline", "strike", "blockquote"],
-    [
-      { list: "ordered" },
-      { list: "bullet" },
-      { indent: "-1" },
-      { indent: "+1" },
-    ],
-    ["link", "image"],
-    ["clean"],
-  ],
-};
+import Editor from "../Editor";
 
-// ReactQuill formats
-const formats = [
-  "header",
-  "bold",
-  "italic",
-  "underline",
-  "strike",
-  "blockquote",
-  "list",
-  "bullet",
-  "indent",
-  "link",
-  "image",
-];
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+
 
 export default function CreatePost() {
   const [title, setTitle] = useState("");
@@ -43,15 +16,14 @@ export default function CreatePost() {
 
   async function createNewPost(e) {
     e.preventDefault();
-
     const data = new FormData();
     data.set("title", title);
     data.set("summary", summary);
     data.set("content", content);
     if (files.length > 0){
-        data.set("file", files[0]);
+        data.set("file", files[0]); // data.set("file", files[0]); // "files data" is in an array[0]
     }
-    // data.set("file", files[0]); // "files data" is in an array[0]
+    
 
     const response = await fetch("http://localhost:8000/post", {
       method: "POST",
@@ -83,12 +55,7 @@ export default function CreatePost() {
         onChange={(e) => setSummary(e.target.value)}
       />
       <input type="file" onChange={(e) => setFiles(e.target.files)} />
-      <ReactQuill
-        value={content}
-        onChange={(newValue) => setContent(newValue)}
-        modules={modules}
-        formats={formats}
-      />
+      <Editor value={content} onChange={setContent} />
       <button type="submit" style={{ marginTop: "5px" }}>
         Create post
       </button>

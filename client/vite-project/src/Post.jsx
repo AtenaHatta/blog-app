@@ -1,5 +1,7 @@
-import { formatISO9075 } from 'date-fns' // time format
 import { Link } from 'react-router-dom'
+
+import { formatISO9075 } from 'date-fns' // time format
+
 
 export default function Post({_id, title, summary, cover, content, createdAt, author}) { 
     return(

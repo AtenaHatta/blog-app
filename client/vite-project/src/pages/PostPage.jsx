@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 import { UserContext } from '../UserContext';
 
@@ -31,8 +31,7 @@ export default function PostPage() {
           <div className="author">by {postInfo.author.username}</div>
           {userInfo.id === postInfo.author._id &&(
             <div className="edit-row">
-            
-            <a className="edit-btn" href=""><FiEdit /> Edit here</a>
+              <Link className="edit-btn" to={`/edit/${postInfo._id}`}><FiEdit /> Edit here</Link>
             </div>
           )}
           <div className="image">

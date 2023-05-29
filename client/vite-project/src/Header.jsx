@@ -1,6 +1,8 @@
 import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+
 import { UserContext } from "./UserContext";
+
 
 export default function Header() {
   const { setUserInfo, userInfo } = useContext(UserContext);
@@ -15,16 +17,6 @@ export default function Header() {
     });
   }, []);
 
-
-  // const fetchBlogs = async () => {
-  //   fetch("http://localhost:8000/profile", {
-  //     credentials: "include",
-  //   }).then((response) => {
-  //     response.json().then((userInfo) => {
-  //       setUserInfo(userInfo);
-  //     });
-  //   });
-  // };
 
   // Logout
   function logout() { 

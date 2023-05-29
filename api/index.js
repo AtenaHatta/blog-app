@@ -13,6 +13,7 @@ const multer = require("multer"); //upload file
 const uploadMiddleware = multer({ dest: "uploads/" }); //upload file to "uploads" folder
 const fs = require("fs"); //file system
 const path = require('path');
+const { log } = require("console");
 
 //cors allow to access "localhost:5173" to "localhost:8000"
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
@@ -52,7 +53,7 @@ app.post("/login", async (req, res) => {
 
   if (passOk) {
     // logged in
-    jwt.sign({ username, id: userDoc._id }, secret, {}, (err, token) => {
+    jwt.sign({ username, id: userDoc._id }, secret, {}, async (err, token) => {
       if (err) throw err;
       res.cookie("token", token).json({
         // Get userID and username
@@ -95,12 +96,8 @@ app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
     
     const { token } = req.cookies;
     jwt.verify(token, secret, {}, async (err, info) => {
-     
       if (err)throw err;
       const { title, summary, content } = req.body;
-      // if (newPath !== "") {
-      //   postData.cover = newPath;
-      // }
       const postDoc = await Post.create({
         title,
         summary,
@@ -112,6 +109,37 @@ app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
     });
   });
   
+
+app.put("/post", uploadMiddleware.single("file"), async (req, res) => {
+  let newPath = null;
+  if(req.file){
+    const { originalname, path } = req.file;
+    console.log(req.file);
+    const parts = originalname.split(".");
+    const ext = parts[parts.length - 1];
+    newPath = path + "." + ext;
+    fs.renameSync(path, path + "." + ext);
+  }
+   const { token } = req.cookies;
+   jwt.verify(token, secret, {}, async (err, info) => {
+
+    
+    if (err)throw err;
+    const {id, title, summary, content} = req.body;
+    const postDoc = await Post.findById(id);
+    const isAuthor = JSON.stringify(postDoc.author) === JSON.stringify(info.id);
+    if(!isAuthor){
+      return res.status(400).json('you are not the author')
+    }
+    await postDoc.update({
+      title, 
+      summary, 
+      content,
+      cover: newPath ? newPath : postDoc.cover,
+    })
+    res.json(postDoc);
+  });
+});
 
 // Get all posts -----------------------------
 app.get("/post", async (req, res) => {
