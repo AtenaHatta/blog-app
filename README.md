@@ -1,7 +1,7 @@
 <br/>
 <p align="center">
   <a href="https://github.com/AtenaHatta/Blog app">
-    <img src="blogappLogo.png" alt="Logo">
+    <img src="blogappLogo.png" alt="Logo" width=50%>
   </a>
 
   <h3 align="center">This blog is a developer sharing information blog that includes a CRUD (create, read, update, delete) application for managing blog posts.</h3>
