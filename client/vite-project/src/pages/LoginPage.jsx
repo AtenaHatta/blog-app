@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import { UserContext } from '../UserContext';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 export default function LoginPage() {
@@ -25,8 +26,7 @@ export default function LoginPage() {
             response.json().then(userInfo => { 
                 setUserInfo(userInfo)
                 setRedirect(true)
-            })
-           
+            })          
         } else {
             alert('Wrong credentials')
         }
@@ -37,6 +37,18 @@ export default function LoginPage() {
     }
     return(
         <div className="format-page">
+            <ToastContainer position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                    className="custom-toast-container"
+        />
             <form className='login' onSubmit={login}>
               <h1>Login</h1>
                 <input type="text" 

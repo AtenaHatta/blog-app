@@ -8,7 +8,7 @@ export default function indexPage(){
 
   console.log(posts);
 
-    // Connect to Backend
+    //Connect to Backend
     useEffect(() => {
         fetch('http://localhost:8000/post').then(response => {
             response.json().then(posts => {

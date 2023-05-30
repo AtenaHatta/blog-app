@@ -216,3 +216,11 @@ div.post-page a.edit-btn:hover {
   color: #f9f8f8;
 }
 
+.custom-toast-container .Toastify__toast {
+  width: 300px;
+  height: 50px;
+}
+
+.custom-toast-container .Toastify__close-button {
+  width: 50px; 
+}
