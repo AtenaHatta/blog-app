@@ -42,29 +42,18 @@ To get a local copy up and running follow these simple example steps.
 1. Clone the repository</br>
 git clone https://github.com/AtenaHatta/blog-app.git
 
-2. Navigate to the project directory
+2. Navigate to the project directory</br>
 cd blog-app
 
-3. Install NPM packages
+3. Install NPM packages</br>
 npm install
 
-4. Run the application
+4. Run the application</br>
 npm run dev
 
 ## Roadmap
 
 See the [open issues](https://github.com/AtenaHatta/Blog app/issues) for a list of proposed features (and known issues).
 
-### Creating A Pull Request
 
 
-
-## Authors
-
-* **** - ** - []() - **
-
-## Acknowledgements
-
-* []()
-* []()
-* []()
