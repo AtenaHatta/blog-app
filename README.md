@@ -18,8 +18,6 @@
   </p>
 </p>
 
-![Downloads](https://img.shields.io/github/downloads/AtenaHatta/Blog app/total) ![Contributors](https://img.shields.io/github/contributors/AtenaHatta/Blog app?color=dark-green) ![Issues](https://img.shields.io/github/issues/AtenaHatta/Blog app) ![License](https://img.shields.io/github/license/AtenaHatta/Blog app) 
-
 ## Table Of Contents
 
 * [About the Project](#about-the-project)
