@@ -18,16 +18,6 @@
   </p>
 </p>
 
-## Table Of Contents
-
-* [About the Project](#about-the-project)
-* [Built With](#built-with)
-* [Getting Started](#getting-started)
-  * [Installation](#installation)
-* [Roadmap](#roadmap)
-* [Authors](#authors)
-* [Acknowledgements](#acknowledgements)
-
 ## About The Project
 
 In this blog, users can view the posts submitted by each user. Additionally, by registering, users can set up their username and password, allowing them to log in. Upon successful login, a success message will be displayed. After logging in, users can create new posts like other users. Furthermore, it is also possible to edit or delete posts after they have been submitted.
