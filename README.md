@@ -19,6 +19,8 @@
 </p>
 
 ## About The Project
+
+<img src="blogappLogo.png" alt="Logo" width=40%>
 <img src="blog_img.png">
 In this blog, users can view the posts submitted by each user. Additionally, by registering, users can set up their username and password, allowing them to log in. Upon successful login, a success message will be displayed. After logging in, users can create new posts like other users. Furthermore, it is also possible to edit or delete posts after they have been submitted.
 
