@@ -25,9 +25,8 @@ In this blog, users can view the posts submitted by each user. Additionally, by 
 ## Built With
 
 
-
-* [React.JS]()
 * [Javascript]()
+* [React.JS]()
 * [Node.js]()
 * [Express]()
 * [MongoDB]()
@@ -40,7 +39,7 @@ To get a local copy up and running follow these simple example steps.
 
 ### Installation
 
-1. Clone the repository
+1. Clone the repository</br>
 git clone https://github.com/AtenaHatta/blog-app.git
 
 2. Navigate to the project directory
