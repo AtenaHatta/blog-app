@@ -7,14 +7,14 @@
   <h3 align="center">This blog is a developer sharing information blog that includes a CRUD (create, read, update, delete) application for managing blog posts.</h3>
 
   <p align="center">
-    <a href="https://github.com/AtenaHatta/Blog app"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/AtenaHatta/blog-app"><strong>Explore the docs »</strong></a>
     <br/>
     <br/>
-    <a href="https://github.com/AtenaHatta/Blog app">View Demo</a>
+    <a href="https://github.com/AtenaHatta/blog-app">View Demo</a>
     .
-    <a href="https://github.com/AtenaHatta/Blog app/issues">Report Bug</a>
+    <a href="https://github.com/AtenaHatta/blog-app/issues">Report Bug</a>
     .
-    <a href="https://github.com/AtenaHatta/Blog app/issues">Request Feature</a>
+    <a href="https://github.com/AtenaHatta/blog-app/issues">Request Feature</a>
   </p>
 </p>
 
@@ -53,7 +53,7 @@ npm run dev
 
 ## Roadmap
 
-See the [open issues](https://github.com/AtenaHatta/Blog app/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/AtenaHatta/blog-app/issues) for a list of proposed features (and known issues).
 
 
 
