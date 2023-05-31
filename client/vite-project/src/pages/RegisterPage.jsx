@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import { ToastContainer, toast } from "react-toastify";
-import { Navigate , useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterPage() {
   const navigate = useNavigate();
@@ -30,19 +30,7 @@ export default function RegisterPage() {
 
   return (
     <div className="format-page">
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        className="custom-toast-container"
-      />
+      
 
       <form className="register" onSubmit={register}>
         <h1>Register</h1>

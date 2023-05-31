@@ -61,7 +61,7 @@ div.post{
 }
 
 div.post:hover{
-  background-color: #1b1b1b;
+  background-color: SLATEGRAY;
   color:#fff;
   border: #1b1b1b 1px solid;
   box-shadow: #fff 0px 0px 3px 0px;
@@ -208,6 +208,14 @@ div.post-page a.edit-btn{
   padding: 5px 20px;
   border-radius: 2px;
   text-decoration: none;
+}
+
+a{
+  cursor: pointer;
+}
+
+a:hover{
+  transform: scale(1.1);
 }
  
 div.post-page a.edit-btn:hover {
