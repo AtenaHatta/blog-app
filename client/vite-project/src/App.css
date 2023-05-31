@@ -205,7 +205,9 @@ div.post-page a.edit-btn{
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 5px 20px;
+  padding: 5px 15px;
+  width: 100px;
+  margin:5px;
   border-radius: 2px;
   text-decoration: none;
 }

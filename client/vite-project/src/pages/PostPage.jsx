@@ -5,7 +5,7 @@ import { UserContext } from '../UserContext';
 
 import { formatISO9075 } from 'date-fns';
 import { FiEdit } from 'react-icons/fi';
-
+import { AiTwotoneDelete } from 'react-icons/ai';
 
 export default function PostPage() {
     const [postInfo, setPostInfo] = useState(null)
@@ -29,11 +29,12 @@ export default function PostPage() {
             {userInfo.id === postInfo.author._id &&(
             <div className="edit-row">
               <Link className="edit-btn" to={`/edit/${postInfo._id}`}><FiEdit />Edit</Link>
+              <Link className="edit-btn" to={`/delete/${postInfo._id}`}><AiTwotoneDelete />Delete</Link>
             </div>
             )}
           <h1>{postInfo.title}</h1>
-          {/* <time>{formatISO9075(new Date(postInfo.createdAt))}</time>
-          <div className="author">by {postInfo.author.username}</div> */}
+          <time>{formatISO9075(new Date(postInfo.createdAt))}</time>
+          <div className="author">by {postInfo.author.username}</div>
  
           <div className="image">
             <img src={`http://localhost:8000/${postInfo.cover}`} alt='' />
